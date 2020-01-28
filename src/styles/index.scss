@@ -1,0 +1,64 @@
+//@import 'fonts';
+
+body {
+  background: #E5E5E5;
+}
+
+.searchcard {
+  display: flex;
+  width: 800px;
+  height: 273px;
+
+  &__img {
+    position: relative;
+    width: 400px;
+    height: 273px;
+    background: #C4C4C4; //url('/img/Rectangle987.jpg'),
+
+    img {
+      width: inherit;
+      height: inherit;
+      object-fit: cover;
+    }
+  }
+
+  &__stepper {
+    position: absolute;
+    bottom: 0;
+    width: 400px;
+    height: 56px;
+    background: rgba(255, 255, 255, 0.52) !important;
+    box-sizing: border-box;
+  }
+
+  &__content {
+    padding: 16px;
+    // font-size: 14px;
+    // line-height: 16px;
+    color: #000000;
+  }
+
+  &__header-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .secondaryText {
+    color: rgba(0, 0, 0, 0.57);
+  }
+
+  .list {
+    padding: 0;
+  
+    &__item {
+      color: rgba(0, 0, 0, 0.72);
+      padding: 6px 0;
+    }
+  
+    &__icon {
+      color: inherit;
+      min-width: 32px;
+    }
+  }
+}

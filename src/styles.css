@@ -1,0 +1,53 @@
+body {
+  background: #E5E5E5;
+}
+
+.searchcard {
+  display: flex;
+  width: 800px;
+  height: 273px;
+}
+.searchcard__img {
+  position: relative;
+  width: 400px;
+  height: 273px;
+  background: #C4C4C4;
+}
+.searchcard__img img {
+  width: inherit;
+  height: inherit;
+  object-fit: cover;
+}
+.searchcard__stepper {
+  position: absolute;
+  bottom: 0;
+  width: 400px;
+  height: 56px;
+  background: rgba(255, 255, 255, 0.52) !important;
+  box-sizing: border-box;
+}
+.searchcard__content {
+  padding: 16px;
+  color: #000000;
+}
+.searchcard__header-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.searchcard .secondaryText {
+  color: rgba(0, 0, 0, 0.57);
+}
+.searchcard .list {
+  padding: 0;
+}
+.searchcard .list__item {
+  color: rgba(0, 0, 0, 0.72);
+  padding: 6px 0;
+}
+.searchcard .list__icon {
+  color: inherit;
+  min-width: 32px;
+}
+
+/*# sourceMappingURL=styles.css.map */
