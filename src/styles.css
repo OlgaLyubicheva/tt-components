@@ -28,6 +28,9 @@ body {
 }
 .searchcard__content {
   padding: 16px;
+  min-width: 400px;
+  min-height: 273px;
+  box-sizing: border-box;
   color: #000000;
 }
 .searchcard__header-footer {

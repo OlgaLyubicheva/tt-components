@@ -13,17 +13,17 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
 
-import TodayIcon from '@material-ui/icons/Today';
-import LocationOnIcon from '@material-ui/icons/LocationOn';
-import PeopleIcon from '@material-ui/icons/People';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 
-const images = [{source: 'img/Rectangle987.jpg'}, {source: 'img/Rectangle987.jpg'}, {source: 'img/Rectangle987.jpg'}];
+import '../styles.css';
 
-const SearchCard = () => {
+//const images = [{source: 'img/Rectangle987.jpg'}, {source: 'img/Rectangle987.jpg'}, {source: 'img/Rectangle987.jpg'}];
+
+const SearchCard = ({images, header, footer, list, text}) => {
   const [activeStep, setActiveStep] = useState(0);
+  const [favoriteOn, setFavoriteOn] = useState(false);
   const maxSteps = images.length;
 
   const handleNext = () => {
@@ -34,35 +34,50 @@ const SearchCard = () => {
     setActiveStep(prevActiveStep => prevActiveStep - 1);
   };
 
+  const handleFavorite = () => {
+    setFavoriteOn(pr => !pr);
+  };
+
+  const handleShare = () => {
+    console.log('Share');
+  };
+
   return (
     <>
       <Paper className='searchcard'>
         <div className='searchcard__img'>
-          <SearchCard.Image index={activeStep}/>
+          <SearchCard.Image index={activeStep} images={images} />
           <SearchCard.ImageStepper current={activeStep} steps={maxSteps} next={handleNext} back={handleBack} />
         </div>
         
         <div className='searchcard__content'>
-          <SearchCard.HeaderFooter primary='Group: up to 10 people' actions={[{alabel: '', icon: <FavoriteBorderIcon/>, activIcon: <FavoriteIcon />}]}/>
+          <SearchCard.HeaderFooter
+            primary={header}
+            actions={[
+              {alabel: '',
+                icon: <FavoriteBorderIcon/>,
+                activIcon: <FavoriteIcon color='secondary'/>,
+                on: favoriteOn,
+                handle: handleFavorite}
+            ]}
+          />
           
           <Typography variant="body2" paragraph>
-            A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring whi
+            {text}
           </Typography>
           
-          <SearchCard.List items={[
-            {text: '1:15 PM, Sunday, January 26', icon: <TodayIcon />},
-            {text: 'Tarasa Shevchenka str, 99', icon: <LocationOnIcon />},
-            {text: '5 people joined', icon: <PeopleIcon />},
-          ]} />
+          <SearchCard.List items={list} />
 
-          <SearchCard.HeaderFooter actions={[{alabel: '', icon: <ShareIcon/>}]}/>
+          <SearchCard.HeaderFooter actions={[
+            {alabel: '', icon: <ShareIcon/>, handle: handleShare}
+          ]}/>
         </div>
       </Paper>
     </>
   );
 };
 
-SearchCard.Image = ({index}) => (
+SearchCard.Image = ({index, images}) => (
   <div>
     {/* <Carousel
       views={images}
@@ -106,8 +121,13 @@ SearchCard.HeaderFooter = ({primary, actions}) => (
     <div>
       {
         actions && actions.map(item => (
-          <IconButton aria-label={item.alabel} size="small" color='inherit'>
-            {item.icon}
+          <IconButton
+            aria-label={item.alabel}
+            size="small"
+            color='inherit'
+            onClick={item.handle}
+          >
+            {item.on ? item.activIcon : item.icon}
           </IconButton>
         ))
       } 

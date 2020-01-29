@@ -33,6 +33,9 @@ body {
 
   &__content {
     padding: 16px;
+    min-width: 400px;
+    min-height: 273px;
+    box-sizing: border-box;
     // font-size: 14px;
     // line-height: 16px;
     color: #000000;
