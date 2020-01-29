@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
-//import 'typeface-roboto';
-import Carousel from 'react-images';
 import Paper from '@material-ui/core/Paper';
 import MobileStepper from '@material-ui/core/MobileStepper';
 import Button from '@material-ui/core/Button';
@@ -21,10 +20,11 @@ import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
 import '../styles.css';
 
-const SearchCard = ({images, header, list, text}) => {
+const SearchCard = ({images, content, onCardClick, onFavClick, onShareClick, onImageClick }) => {
   const [activeStep, setActiveStep] = useState(0);
   const [favoriteOn, setFavoriteOn] = useState(false);
   const maxSteps = images.length;
+  const {header, list, text} = content;
 
   const handleNext = () => {
     setActiveStep(prevActiveStep => prevActiveStep + 1);
@@ -36,22 +36,28 @@ const SearchCard = ({images, header, list, text}) => {
 
   const handleFavorite = () => {
     setFavoriteOn(pr => !pr);
+    onFavClick();
   };
 
   const handleShare = () => {
     console.log('Share');
+    onShareClick();
   };
 
   return (
     <>
       <Paper className='searchcard'>
         <div className='searchcard__img'>
-          <SearchCard.Image index={activeStep} images={images} />
+          <img
+            src={images[activeStep].source}
+            alt={images[activeStep].source}
+            onClick={() => onImageClick(activeStep)}
+          />
           <SearchCard.ImageStepper current={activeStep} steps={maxSteps} next={handleNext} back={handleBack} />
         </div>
         
         <div className='searchcard__content'>
-          <div>
+          <div onClick={onCardClick}>
             <SearchCard.HeaderFooter primary={header} />
             
             <Typography variant="body2">
@@ -74,13 +80,6 @@ const SearchCard = ({images, header, list, text}) => {
     </>
   );
 };
-
-SearchCard.Image = ({index, images}) => (
-  <img
-    src={images[index].source}
-    alt={images[index].source}
-  />
-);
 
 SearchCard.ImageStepper = ({current, steps, next, back}) => (
   <MobileStepper
@@ -115,6 +114,7 @@ SearchCard.Actions = ({actions}) => (
     {
       actions && actions.map(item => (
         <IconButton
+          key={item.alabel}
           aria-label={item.alabel}
           className='iconButtons'
           color='inherit'
@@ -148,5 +148,23 @@ SearchCard.List = ({ items }) => (
     }
   </List>
 );
+
+SearchCard.propTypes = {
+  images: PropTypes.arrayOf(PropTypes.shape({
+    source: PropTypes.string,
+  })).isRequired,
+  content: PropTypes.shape({
+    header: PropTypes.string,
+    list: PropTypes.arrayOf(PropTypes.shape({
+      text: PropTypes.string,
+      icon: PropTypes.node,
+    })),
+    text: PropTypes.string,
+  }).isRequired,
+  onCardClick: PropTypes.func.isRequired,
+  onFavClick: PropTypes.func.isRequired,
+  onShareClick: PropTypes.func.isRequired,
+  onImageClick: PropTypes.func.isRequired,
+};
 
 export default SearchCard;

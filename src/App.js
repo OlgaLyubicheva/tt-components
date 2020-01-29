@@ -12,13 +12,20 @@ const App = () => {
     <>
       <SearchCard
         images={images}
-        header='Group: up to 10 people'
-        list={[
-          {text: '1:15 PM, Sunday, January 26', icon: <TodayIcon />},
-          {text: 'Tarasa Shevchenka str, 99', icon: <LocationOnIcon />},
-          {text: '5 people joined', icon: <PeopleIcon />},
-        ]}
-        text='A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring whi'/>
+        content={{
+          header: 'Group: up to 10 people',
+          list: [
+            {text: '1:15 PM, Sunday, January 26', icon: <TodayIcon />},
+            {text: 'Tarasa Shevchenka str, 99', icon: <LocationOnIcon />},
+            {text: '5 people joined', icon: <PeopleIcon />},
+          ],
+          text: 'A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring whi',
+        }}
+        onCardClick={() => {console.log('card is cliked');}} //або зробити саме тіло картки як тег "a"
+        onFavClick={() => {console.log('Faver is added');}} //щоб додати картку в список
+        onShareClick={() => {console.log('share is cliked');}} //щоб показати діалог для шеру
+        onImageClick={(index) => {console.log('index of foto:', index);}}
+      />
     </>
   );
 };
