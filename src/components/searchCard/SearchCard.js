@@ -11,7 +11,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
 
-import { icons } from '../sources/iconsDescriptions';
+import { icons } from './iconsDescriptions';
 
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
@@ -19,11 +19,12 @@ import ShareIcon from '@material-ui/icons/Share';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
-import '../styles.css';
+import './searchCard.css';
 
 const SearchCard = ({images, content, onCardClick, onFavClick, onShareClick, onImageClick }) => {
   const [activeStep, setActiveStep] = useState(0);
   const [favoriteOn, setFavoriteOn] = useState(false);
+
   const maxSteps = images.length;
   const {header, list, text} = content;
 
@@ -48,12 +49,8 @@ const SearchCard = ({images, content, onCardClick, onFavClick, onShareClick, onI
   return (
     <>
       <Paper className='searchcard'>
-        <div className='searchcard__img'>
-          <img
-            src={images[activeStep].source}
-            alt={images[activeStep].source}
-            onClick={() => onImageClick(activeStep)}
-          />
+        <div className='searchcard__slider'>
+          <SearchCard.Image images={images} activeStep={activeStep} onClick={onImageClick}/>
           <SearchCard.ImageStepper current={activeStep} steps={maxSteps} next={handleNext} back={handleBack} />
         </div>
         
@@ -79,6 +76,27 @@ const SearchCard = ({images, content, onCardClick, onFavClick, onShareClick, onI
         </div>
       </Paper>
     </>
+  );
+};
+
+SearchCard.Image = ({images, activeStep, onClick}) => {
+  const slide = document.getElementsByClassName('searchcard__img')[0];
+  const slideWidth = slide ? slide.offsetWidth/images.length : 0;
+  const transformX = {transform: `translateX(${-slideWidth * activeStep}px)`};
+
+  return (
+    <div className="searchcard__img" style={transformX}>
+      {
+        images.map(image => (
+          <img
+            key={Math.random()}
+            src={image.source}
+            alt={image.source}
+            onClick={() => onClick(activeStep)}
+          />
+        ))
+      }
+    </div>
   );
 };
 

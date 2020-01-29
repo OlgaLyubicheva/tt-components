@@ -5,6 +5,7 @@
   "main": ".eslintrc.js",
   "scripts": {
     "sass": "sass ./src/styles/index.scss ./src/styles.css",
+    "sass:1": "sass ./src/components/searchCard/searchCard.scss ./src/components/searchCard/searchCard.css",
     "sass:w": "sass ./src/styles/index.scss ./src/styles.css --watch",
     "start": "webpack --mode development --watch",
     "build": "webpack --mode production",

@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import SearchCard from './components/SearchCard';
+import SearchCard from './components/searchCard/SearchCard';
 
 const App = () => {
   const [data, setData] = useState([]);
