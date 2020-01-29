@@ -32,6 +32,9 @@ body {
   }
 
   &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     padding: 16px;
     min-width: 400px;
     min-height: 273px;
@@ -45,6 +48,10 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    .iconButtons {
+      margin: -9px;
+    }
   }
 
   .secondaryText {

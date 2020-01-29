@@ -16,12 +16,12 @@ import Typography from '@material-ui/core/Typography';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
 import '../styles.css';
 
-//const images = [{source: 'img/Rectangle987.jpg'}, {source: 'img/Rectangle987.jpg'}, {source: 'img/Rectangle987.jpg'}];
-
-const SearchCard = ({images, header, footer, list, text}) => {
+const SearchCard = ({images, header, list, text}) => {
   const [activeStep, setActiveStep] = useState(0);
   const [favoriteOn, setFavoriteOn] = useState(false);
   const maxSteps = images.length;
@@ -100,12 +100,12 @@ SearchCard.ImageStepper = ({current, steps, next, back}) => (
     activeStep={current}
     className='searchcard__stepper'
     nextButton={
-      <Button size="small" onClick={next} disabled={current === steps - 1}>
+      <Button endIcon={<ArrowForwardIosIcon />} size="small" onClick={next} disabled={current === steps - 1}>
         Next
       </Button>
     }
     backButton={
-      <Button size="small" onClick={back} disabled={current === 0}>
+      <Button startIcon={<ArrowBackIosIcon />} size="small" onClick={back} disabled={current === 0}>
         Back
       </Button>
     }
@@ -123,7 +123,7 @@ SearchCard.HeaderFooter = ({primary, actions}) => (
         actions && actions.map(item => (
           <IconButton
             aria-label={item.alabel}
-            size="small"
+            className='iconButtons'
             color='inherit'
             onClick={item.handle}
           >

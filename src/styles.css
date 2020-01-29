@@ -27,6 +27,9 @@ body {
   box-sizing: border-box;
 }
 .searchcard__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   padding: 16px;
   min-width: 400px;
   min-height: 273px;
@@ -37,6 +40,9 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.searchcard__header-footer .iconButtons {
+  margin: -9px;
 }
 .searchcard .secondaryText {
   color: rgba(0, 0, 0, 0.57);
