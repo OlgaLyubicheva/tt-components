@@ -5,12 +5,13 @@ import Paper from '@material-ui/core/Paper';
 import MobileStepper from '@material-ui/core/MobileStepper';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
-
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
+
+import { icons } from '../sources/iconsDescriptions';
 
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
@@ -133,7 +134,7 @@ SearchCard.List = ({ items }) => (
       items && items.map(item => (
         <ListItem key={item.text} className='list__item'>
           <ListItemIcon className='list__icon'>
-            {item.icon || ''}
+            {icons[item.icon] || ''}
           </ListItemIcon>
           <ListItemText primary={
             <Typography

@@ -36,7 +36,8 @@ module.exports = {
     ),
     new CopyPlugin([
       { from: 'src/sources/img', to: 'img' },
-      { from: 'src/sources/fonts', to: 'fonts' }
+      { from: 'src/sources/fonts', to: 'fonts' },
+      { from: 'src/sources/api', to: 'api' }
     ]),
   ]
 };
