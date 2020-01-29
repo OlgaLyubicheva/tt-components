@@ -4,44 +4,50 @@ body {
 
 .searchcard {
   display: flex;
-  width: 800px;
+  max-width: 800px;
+}
+.searchcard__cell, .searchcard__content, .searchcard__img {
+  max-width: 400px;
+  width: 50%;
   height: 273px;
+  transition: 2s ease-out;
 }
 .searchcard__img {
   position: relative;
-  width: 400px;
-  height: 273px;
   background: #C4C4C4;
 }
 .searchcard__img img {
-  width: inherit;
-  height: inherit;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
 }
 .searchcard__stepper {
   position: absolute;
   bottom: 0;
-  width: 400px;
+  width: 100%;
   height: 56px;
   background: rgba(255, 255, 255, 0.52) !important;
   box-sizing: border-box;
 }
 .searchcard__content {
   display: flex;
-  flex-direction: column;
+  position: relative;
   justify-content: space-between;
   padding: 16px;
-  min-width: 400px;
-  min-height: 273px;
   box-sizing: border-box;
   color: #000000;
 }
 .searchcard__header-footer {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  height: 30px;
 }
-.searchcard__header-footer .iconButtons {
+.searchcard__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-between;
+}
+.searchcard__actions .iconButtons {
   margin: -9px;
 }
 .searchcard .secondaryText {
@@ -49,6 +55,7 @@ body {
 }
 .searchcard .list {
   padding: 0;
+  margin: 6px 0 -6px;
 }
 .searchcard .list__item {
   color: rgba(0, 0, 0, 0.72);
@@ -57,6 +64,28 @@ body {
 .searchcard .list__icon {
   color: inherit;
   min-width: 32px;
+}
+
+@media screen and (max-width: 729px) {
+  .searchcard {
+    flex-wrap: wrap;
+    max-width: 344px;
+  }
+  .searchcard__cell, .searchcard__img, .searchcard__content {
+    width: 100%;
+    min-width: 344px;
+    height: 232px;
+  }
+  .searchcard__content {
+    padding: 12px;
+  }
+  .searchcard__actions {
+    position: absolute;
+    right: 12px;
+    width: 72px;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+  }
 }
 
 /*# sourceMappingURL=styles.css.map */

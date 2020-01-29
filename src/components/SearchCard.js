@@ -51,25 +51,23 @@ const SearchCard = ({images, header, list, text}) => {
         </div>
         
         <div className='searchcard__content'>
-          <SearchCard.HeaderFooter
-            primary={header}
-            actions={[
-              {alabel: '',
-                icon: <FavoriteBorderIcon/>,
-                activIcon: <FavoriteIcon color='secondary'/>,
-                on: favoriteOn,
-                handle: handleFavorite}
-            ]}
-          />
-          
-          <Typography variant="body2" paragraph>
-            {text}
-          </Typography>
-          
-          <SearchCard.List items={list} />
+          <div>
+            <SearchCard.HeaderFooter primary={header} />
+            
+            <Typography variant="body2">
+              {text}
+            </Typography>
+            
+            <SearchCard.List items={list} />
+          </div>
 
-          <SearchCard.HeaderFooter actions={[
-            {alabel: '', icon: <ShareIcon/>, handle: handleShare}
+          <SearchCard.Actions actions={[
+            {alabel: 'Favorite',
+              icon: <FavoriteBorderIcon/>,
+              activIcon: <FavoriteIcon color='secondary'/>,
+              on: favoriteOn,
+              handle: handleFavorite},
+            {alabel: 'Share', icon: <ShareIcon/>, handle: handleShare}
           ]}/>
         </div>
       </Paper>
@@ -78,18 +76,10 @@ const SearchCard = ({images, header, list, text}) => {
 };
 
 SearchCard.Image = ({index, images}) => (
-  <div>
-    {/* <Carousel
-      views={images}
-      currentIndex={activeStep}
-      //components={}    
-    /> */}
-
-    <img
-      src={images[index].source}
-      alt={images[index].source}
-    />
-  </div>
+  <img
+    src={images[index].source}
+    alt={images[index].source}
+  />
 );
 
 SearchCard.ImageStepper = ({current, steps, next, back}) => (
@@ -112,26 +102,28 @@ SearchCard.ImageStepper = ({current, steps, next, back}) => (
   />
 );
 
-SearchCard.HeaderFooter = ({primary, actions}) => (
+SearchCard.HeaderFooter = ({primary}) => (
   <div className='searchcard__header-footer'>
-    <Typography component="span" variant="body2" className='secondaryText'>
+    <Typography component="div" variant="body2" className='secondaryText'>
       {primary}
-    </Typography>
+    </Typography>   
+  </div>
+);
 
-    <div>
-      {
-        actions && actions.map(item => (
-          <IconButton
-            aria-label={item.alabel}
-            className='iconButtons'
-            color='inherit'
-            onClick={item.handle}
-          >
-            {item.on ? item.activIcon : item.icon}
-          </IconButton>
-        ))
-      } 
-    </div>   
+SearchCard.Actions = ({actions}) => (
+  <div className='searchcard__actions'>
+    {
+      actions && actions.map(item => (
+        <IconButton
+          aria-label={item.alabel}
+          className='iconButtons'
+          color='inherit'
+          onClick={item.handle}
+        >
+          {item.on ? item.activIcon : item.icon}
+        </IconButton>
+      ))
+    } 
   </div>
 );
 

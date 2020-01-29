@@ -5,7 +5,8 @@ import TodayIcon from '@material-ui/icons/Today';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import PeopleIcon from '@material-ui/icons/People';
 
-const images = [{source: 'img/Rectangle987.jpg'}, {source: 'img/Rectangle987.jpg'}, {source: 'img/Rectangle987.jpg'}];
+const images = [{source: 'img/Rectangle987.jpg'}, {source: 'img/photo2.jpg'}, {source: 'img/photo3.jpg'}];
+
 const App = () => {
   return (
     <>
