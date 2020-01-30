@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import Paper from '@material-ui/core/Paper';
@@ -26,7 +26,7 @@ const SearchCard = ({images, content, onCardClick, onFavClick, onShareClick, onI
   const [favoriteOn, setFavoriteOn] = useState(false);
 
   const maxSteps = images.length;
-  const {header, list, text} = content;
+  const {eventName, startDate, startAddress, joinedPeople, isGroup, maxParticipants} = content;
 
   const handleNext = () => {
     setActiveStep(prevActiveStep => prevActiveStep + 1);
@@ -56,13 +56,13 @@ const SearchCard = ({images, content, onCardClick, onFavClick, onShareClick, onI
         
         <div className='searchcard__content'>
           <div onClick={onCardClick}>
-            <SearchCard.HeaderFooter primary={header} />
+            <SearchCard.HeaderFooter primary={isGroup ? `Group: up to ${maxParticipants} people` : ''} />
             
             <Typography variant="body2">
-              {text}
+              {eventName}
             </Typography>
             
-            <SearchCard.List items={list} />
+            <SearchCard.List date={startDate} address={startAddress} people={joinedPeople} />
           </div>
 
           <SearchCard.Actions actions={[
@@ -89,9 +89,9 @@ SearchCard.Image = ({images, activeStep, onClick}) => {
       {
         images.map(image => (
           <img
-            key={Math.random()}
-            src={image.source}
-            alt={image.source}
+            key={image.id}
+            src={image.url}
+            alt={image.alt}
             onClick={() => onClick(activeStep)}
           />
         ))
@@ -146,39 +146,44 @@ SearchCard.Actions = ({actions}) => (
   </div>
 );
 
-SearchCard.List = ({ items }) => (
+SearchCard.List = ({ date, address, people }) => (
   <List className='list'>
-    {
-      items && items.map(item => (
-        <ListItem key={item.text} className='list__item'>
-          <ListItemIcon className='list__icon'>
-            {icons[item.icon] || ''}
-          </ListItemIcon>
-          <ListItemText primary={
-            <Typography
-              component="span"
-              variant="body2"
-            >
-              {item.text || ''}
-            </Typography>
-          } />
-        </ListItem>
-      ))
-    }
+    <SearchCard.ListItem icon='today' text={date} />
+    <SearchCard.ListItem icon='location' text={address} />
+    <SearchCard.ListItem icon='people' text={people + ' people joined'} />
   </List>
+);
+
+SearchCard.ListItem = ({ icon, text }) => (
+  <ListItem key={text} className='list__item'>
+    <ListItemIcon className='list__icon'>
+      {icons[icon] || ''}
+    </ListItemIcon>
+    <ListItemText primary={
+      <Typography
+        component="span"
+        variant="body2"
+      >
+        {text || ''}
+      </Typography>
+    } />
+  </ListItem>
 );
 
 SearchCard.propTypes = {
   images: PropTypes.arrayOf(PropTypes.shape({
-    source: PropTypes.string,
+    id: PropTypes.number.isRequired,
+    url: PropTypes.string.isRequired,
+    alt: PropTypes.string,
   })).isRequired,
   content: PropTypes.shape({
-    header: PropTypes.string,
-    list: PropTypes.arrayOf(PropTypes.shape({
-      text: PropTypes.string,
-      icon: PropTypes.node,
-    })),
-    text: PropTypes.string,
+    id: PropTypes.number,
+    eventName: PropTypes.string,
+    startDate: PropTypes.string,
+    startAddress: PropTypes.string,
+    joinedPeople: PropTypes.number,
+    isGroup: PropTypes.bool,
+    maxParticipants: PropTypes.number,
   }).isRequired,
   onCardClick: PropTypes.func.isRequired,
   onFavClick: PropTypes.func.isRequired,
